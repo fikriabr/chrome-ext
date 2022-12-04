@@ -1,0 +1,23 @@
+{
+  "name": "my-chrome-ext-tools",
+  "version": "1.0.0",
+  "description": "My Chrome Extension Tools, using React & TypeScript",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/fikriabr/my-chrome-ext-tools.git"
+  },
+  "keywords": [
+    "Chrome",
+    "Extension"
+  ],
+  "author": "Fikri Abdul Rahman",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/fikriabr/my-chrome-ext-tools/issues"
+  },
+  "homepage": "https://github.com/fikriabr/my-chrome-ext-tools#readme"
+}
