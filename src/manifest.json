@@ -1,0 +1,10 @@
+{
+  "manifest_version": 3,
+  "name": "my-chrome-ext-tools",
+  "description": "My Chrome Extenson React Tool",
+  "version": "1.0.0",
+  "action": {
+    "default_popup": "popup.html",
+    "default_title": "React Extension"
+  }
+}
