@@ -19,5 +19,10 @@
   "bugs": {
     "url": "https://github.com/fikriabr/my-chrome-ext-tools/issues"
   },
-  "homepage": "https://github.com/fikriabr/my-chrome-ext-tools#readme"
+  "homepage": "https://github.com/fikriabr/my-chrome-ext-tools#readme",
+  "devDependencies": {
+    "@types/react": "^18.0.26",
+    "react": "^17.0.1",
+    "typescript": "^4.9.3"
+  }
 }
