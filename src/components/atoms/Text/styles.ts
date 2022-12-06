@@ -32,6 +32,7 @@ const StyledText = styled.p<TypeText>`
   color: ${({ color }) => color};
   margin: 0;
   padding: ${({ padding }) => padding || "none"};
+  font-family: "Gill Sans", sans-serif;
 `;
 
 export default StyledText;

@@ -4,10 +4,11 @@ import Button from '@mui/material/Button'
 import { BoxedOption } from './styles'
 import Text from '../../components/atoms/Text'
 
-const options = () => {
+const Options = () => {
   return (
     <>
       <BoxedOption>
+        <Text size="xl">My Chrome Extention Tool - Options</Text>
         <Button variant="contained">Sample Button</Button>
         <Text>Hello From Options</Text>
       </BoxedOption>
@@ -17,4 +18,4 @@ const options = () => {
 
 const root = document.createElement('div')
 document.body.appendChild(root)
-ReactDOM.render(options(), root)
+ReactDOM.render(<Options />, root)
