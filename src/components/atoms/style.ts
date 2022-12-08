@@ -1,5 +1,24 @@
 import styled from "styled-components";
 
+type TypeContainer = {
+  width?: string;
+  height?: string;
+  display?: string;
+  background?: string;
+  padding?: string;
+  border?: string;
+}
+
+const StyledContainer = styled.div<TypeContainer>`
+  display: ${({ display }) => display};
+  width: ${({ width }) => width};
+  height: ${({ height }) => height};
+  background: ${({ background }) => background};
+  padding: ${({ padding }) => padding};
+  border: ${({ border }) => border};
+`;
+
+
 const getFontPixelsSize = (size: string) => {
   switch (size) {
     case "xs":
@@ -33,6 +52,11 @@ const StyledText = styled.p<TypeText>`
   margin: 0;
   padding: ${({ padding }) => padding || "none"};
   font-family: "Gill Sans", sans-serif;
+  display: flex;
+  align-items: center;
 `;
 
-export default StyledText;
+export {
+  StyledContainer,
+  StyledText
+};

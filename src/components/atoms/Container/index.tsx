@@ -1,5 +1,5 @@
 import React from 'react'
-import StyledContainer from './style'
+import { StyledContainer } from '../style'
 
 interface IContainer {
   children: JSX.Element | string | JSX.Element[]
@@ -8,6 +8,7 @@ interface IContainer {
   display?: string
   background?: string
   padding?: string
+  border?: string
 }
 
 const Container: React.FC<IContainer> = ({
@@ -17,6 +18,7 @@ const Container: React.FC<IContainer> = ({
   display,
   background,
   padding,
+  border,
 }) => {
   return (
     <StyledContainer
@@ -25,6 +27,7 @@ const Container: React.FC<IContainer> = ({
       display={display}
       background={background}
       padding={padding}
+      border={border}
     >
       {children}
     </StyledContainer>
@@ -38,6 +41,7 @@ const defaultProps: IContainer = {
   display: 'block',
   background: '#ffffff',
   padding: '0',
+  border: 'none',
 }
 Container.defaultProps = defaultProps
 

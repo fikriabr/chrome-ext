@@ -1,8 +1,8 @@
 import React from 'react'
-import StyledText from './styles'
+import { StyledText } from '../style'
 
 interface IText {
-  children: JSX.Element | string
+  children: React.ReactNode
   size?: string
   weight?: string
   color?: string
