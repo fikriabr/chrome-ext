@@ -6,6 +6,7 @@ import Text from "../../atoms/Text";
 interface IRight {
   listMenu: {
     name: string;
+    icon: JSX.Element;
   }[],
 }
 const RightContainer = ({
@@ -29,10 +30,13 @@ const RightContainer = ({
                 margin: '5px',
                 marginRight: '10px',
                 borderRadius: '5px',
-                border: '1px solid #999999'
+                border: '1px solid #999999',
+                display: 'flex',
+                justifyContent: 'space-around',
+                alignItems: 'center',
               }}
             >
-              &nbsp;
+              {menu.icon}
             </div>
             {menu.name}
           </Text>

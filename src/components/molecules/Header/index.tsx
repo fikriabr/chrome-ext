@@ -10,8 +10,8 @@ interface IHeader {
 const Header = ({ title }: IHeader) => {
   return (
     <Container width="389px" height="81px" background="#EEEEEE" padding="10px">
-      <Text weight="bold" size="xl" color="#1848C2" padding="0 0 10px 0">
-        <BuildCircleIcon /> {title}
+      <Text weight="bold" size="xxl" color="#1848C2" padding="0 0 10px 0">
+        <BuildCircleIcon />&nbsp; {title}
       </Text>
       <Input icon={<SearchIcon24 />} />
     </Container>

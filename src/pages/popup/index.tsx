@@ -1,7 +1,16 @@
 import React, { useEffect } from 'react';
 import ReactDOM from 'react-dom';
 import Container from '../../components/atoms/Container';
-import Text from '../../components/atoms/Text';
+import {
+  Air32,
+  Bookmarks32,
+  CalendarToday32,
+  CodeSnippet32,
+  Notification32,
+  Satellite32,
+  Schedule32,
+  Source32,
+} from '../../components/atoms/Icons';
 import Header from '../../components/molecules/Header';
 import LeftContainer from '../../components/molecules/LeftContainer';
 import RightContainer from '../../components/molecules/RightContainer';
@@ -9,6 +18,7 @@ import RightContainer from '../../components/molecules/RightContainer';
 interface IRightMenu {
   name: string;
   components: JSX.Element | undefined;
+  icon: JSX.Element;
 }
 const leftMenu = [
   {
@@ -17,23 +27,28 @@ const leftMenu = [
     menus: [
       {
         name: 'Working Hour Calculator',
-        components: <></>
+        components: <></>,
+        icon: <Schedule32 />
       },
       {
         name: 'Coding Snippets',
-        components: <></>
+        components: <></>,
+        icon: <CodeSnippet32 />
       },
       {
         name: 'Bookmarks',
-        components: <></>
+        components: <></>,
+        icon: <Bookmarks32 />
       },
       {
         name: 'Notification',
-        components: <></>
+        components: <></>,
+        icon: <Notification32 />
       },
       {
         name: 'Schedule',
-        components: <></>
+        components: <></>,
+        icon: <CalendarToday32 />
       },
     ]
   },
@@ -43,11 +58,13 @@ const leftMenu = [
     menus: [
       {
         name: 'Himawari 8',
-        components: <></>
+        components: <></>,
+        icon: <Satellite32 />
       },
       {
         name: 'Air Meter',
-        components: <></>
+        components: <></>,
+        icon: <Air32 />
       }
     ]
   },
@@ -57,7 +74,8 @@ const leftMenu = [
     menus: [
       {
         name: 'Documentation',
-        components: <></>
+        components: <></>,
+        icon: <Source32 />
       },
     ]
   },

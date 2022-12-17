@@ -43,7 +43,8 @@ type TypeText = {
   size?: string,
   weight?: string,
   color?: string,
-  padding?: string
+  padding?: string,
+  background?: string,
 }
 
 const StyledText = styled.p<TypeText>`
@@ -52,9 +53,13 @@ const StyledText = styled.p<TypeText>`
   color: ${({ color }) => color};
   margin: 0;
   padding: ${({ padding }) => padding || "none"};
+  background: ${({ background }) => background || ""};
   font-family: sans-serif;
   display: flex;
   align-items: center;
+  &:hover {
+    font-weight: bold;
+  }
 `;
 
 export {
