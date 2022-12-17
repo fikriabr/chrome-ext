@@ -1,75 +1,112 @@
-import React from 'react'
-import ReactDOM from 'react-dom'
-import Container from '../../components/atoms/Container'
-import { BuildCircleIcon, SearchIcon24 } from '../../components/atoms/Icons'
-import Input from '../../components/atoms/Input'
-import Text from '../../components/atoms/Text'
+import React, { useEffect } from 'react';
+import ReactDOM from 'react-dom';
+import Container from '../../components/atoms/Container';
+import Text from '../../components/atoms/Text';
+import Header from '../../components/molecules/Header';
+import LeftContainer from '../../components/molecules/LeftContainer';
+import RightContainer from '../../components/molecules/RightContainer';
 
-const Header = () => {
-  return (
-    <Container width="389px" height="81px" background="#EEEEEE" padding="10px">
-      <Text weight="bold" size="xl" color="#1848C2" padding="0 0 10px 0">
-        <BuildCircleIcon /> Chrome Tools
-      </Text>
-      <Input icon={<SearchIcon24 />} />
-    </Container>
-  )
+interface IRightMenu {
+  name: string;
+  components: JSX.Element | undefined;
 }
-
-const LeftContainer = () => {
-  return (
-    <Container
-      width="131px"
-      height="318px"
-      background="#FFFFFF"
-      border="1px solid #CCCCCC"
-    >
-      <Text weight="bold" size="xs" padding="5px">
-        Work Stuff
-      </Text>
-      <Text weight="normal" size="xs" padding="5px">
-        Weather and Other
-      </Text>
-    </Container>
-  )
-}
-
-const RightContainer = () => {
-  return (
-    <Container
-      width="278px"
-      height="318px"
-      background="#FFFFFF"
-      border="1px solid #CCCCCC"
-    >
-      <Text weight="bold" size="xs" padding="15px 5px">
-        Coding Snippets
-      </Text>
-      <Text weight="normal" size="xs" padding="15px 5px">
-        Working Hour Calculator
-      </Text>
-    </Container>
-  )
-}
+const leftMenu = [
+  {
+    name: 'Work Stuff',
+    isActive: true,
+    menus: [
+      {
+        name: 'Working Hour Calculator',
+        components: <></>
+      },
+      {
+        name: 'Coding Snippets',
+        components: <></>
+      },
+      {
+        name: 'Bookmarks',
+        components: <></>
+      },
+      {
+        name: 'Notification',
+        components: <></>
+      },
+      {
+        name: 'Schedule',
+        components: <></>
+      },
+    ]
+  },
+  {
+    name: 'Weather',
+    isActive: false,
+    menus: [
+      {
+        name: 'Himawari 8',
+        components: <></>
+      },
+      {
+        name: 'Air Meter',
+        components: <></>
+      }
+    ]
+  },
+  {
+    name: 'Other',
+    isActive: false,
+    menus: [
+      {
+        name: 'Documentation',
+        components: <></>
+      },
+    ]
+  },
+];
 
 const PopupContainer = () => {
+  const [leftMenuState, setLeftMenu] = React.useState<typeof leftMenu>([]);
+  const [rightMenu, setRightMenu] = React.useState<IRightMenu[]>([]);
+
+
+  const getRightMenu = (selectedLeftMenu: typeof leftMenu) => {
+    const activeMenu = selectedLeftMenu.find((menu) => menu.isActive === true);
+    if (activeMenu) {
+      setRightMenu(activeMenu.menus)
+    }
+  }
+
+  useEffect(() => {
+    setLeftMenu(leftMenu)
+    getRightMenu(leftMenu)
+  }, [])
+
+  const handleOnClick = (menu: string) => {
+    const updatedMenu = leftMenuState.map((data) => ({
+      ...data,
+      isActive: false,
+      ...(data.name === menu ? { isActive: true } : {}),
+    }));
+    setLeftMenu(updatedMenu);
+    getRightMenu(updatedMenu)
+  };
+
   return (
-    <Container width="409px" height="419px">
-      {Header()}
+    <Container width='409px' height='401px'>
+      <Header title='Chrome Tools' />
       <Container
-        width="409px"
-        height="318px"
-        background="#FFFFFF"
-        display="flex"
+        width='409px'
+        height='300px'
+        background='#FFFFFF'
+        display='flex'
       >
-        {LeftContainer()}
-        {RightContainer()}
+        <LeftContainer listMenu={leftMenuState} onClick={handleOnClick} />
+        <RightContainer listMenu={rightMenu} />
       </Container>
     </Container>
-  )
-}
+  );
+};
 
-const root = document.createElement('div')
-document.body.appendChild(root)
-document.body.style.margin = '0px'
-ReactDOM.render(<PopupContainer />, root)
+const root = document.createElement('div');
+document.body.appendChild(root);
+document.body.style.margin = '0px';
+ReactDOM.render(<PopupContainer />, root);

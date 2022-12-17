@@ -2,7 +2,7 @@ import React from 'react'
 import { StyledContainer } from '../style'
 
 interface IContainer {
-  children: JSX.Element | string | JSX.Element[]
+  children: JSX.Element | string | JSX.Element[] | React.ReactNode
   width?: string
   height?: string
   display?: string

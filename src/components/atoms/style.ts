@@ -16,6 +16,7 @@ const StyledContainer = styled.div<TypeContainer>`
   background: ${({ background }) => background};
   padding: ${({ padding }) => padding};
   border: ${({ border }) => border};
+  overflow-y: auto;
 `;
 
 
@@ -51,7 +52,7 @@ const StyledText = styled.p<TypeText>`
   color: ${({ color }) => color};
   margin: 0;
   padding: ${({ padding }) => padding || "none"};
-  font-family: "Gill Sans", sans-serif;
+  font-family: sans-serif;
   display: flex;
   align-items: center;
 `;
