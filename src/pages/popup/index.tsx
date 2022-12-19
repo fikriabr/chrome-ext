@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import ReactDOM from 'react-dom';
+import { createGlobalStyle } from 'styled-components';
 import Container from '../../components/atoms/Container';
 import {
   Air32,
@@ -85,7 +86,6 @@ const PopupContainer = () => {
   const [leftMenuState, setLeftMenu] = React.useState<typeof leftMenu>([]);
   const [rightMenu, setRightMenu] = React.useState<IRightMenu[]>([]);
 
-
   const getRightMenu = (selectedLeftMenu: typeof leftMenu) => {
     const activeMenu = selectedLeftMenu.find((menu) => menu.isActive === true);
     if (activeMenu) {
@@ -128,7 +128,33 @@ const PopupContainer = () => {
   );
 };
 
+const GlobalStyle = createGlobalStyle`
+  @font-face {
+    font-family: 'Lato';
+    src: url('./Lato-Regular.ttf') format('truetype');
+    font-weight: 300;
+    font-style: normal;
+    font-display: auto;
+  }
+  @font-face {
+    font-family: 'Lato';
+    src: url('./Lato-Bold.ttf') format('truetype');
+    font-weight: 700;
+    font-style: normal;
+    font-display: auto;
+  }
+`;
+
+const Popup = () => {
+  return (
+    <>
+      <GlobalStyle />
+      <PopupContainer />
+    </>
+  )
+}
+
 const root = document.createElement('div');
 document.body.appendChild(root);
 document.body.style.margin = '0px';
-ReactDOM.render(<PopupContainer />, root);
+ReactDOM.render(<Popup />, root);

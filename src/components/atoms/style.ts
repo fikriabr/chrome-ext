@@ -52,7 +52,7 @@ const StyledText = styled.p<TypeText>`
   margin: 0;
   padding: ${({ padding }) => padding || "none"};
   background: ${({ background }) => background || ""};
-  font-family: sans-serif;
+  font-family: Lato, sans-serif;
   display: flex;
   align-items: center;
   &:hover {
