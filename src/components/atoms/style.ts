@@ -6,7 +6,6 @@ type TypeContainer = {
   display?: string;
   background?: string;
   padding?: string;
-  border?: string;
 }
 
 const StyledContainer = styled.div<TypeContainer>`
@@ -15,7 +14,6 @@ const StyledContainer = styled.div<TypeContainer>`
   height: ${({ height }) => height};
   background: ${({ background }) => background};
   padding: ${({ padding }) => padding};
-  border: ${({ border }) => border};
   overflow-y: auto;
 `;
 

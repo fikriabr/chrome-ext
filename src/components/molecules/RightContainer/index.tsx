@@ -17,15 +17,14 @@ const RightContainer = ({
       width='278px'
       height='300px'
       background='#FFFFFF'
-      border='1px solid #CCCCCC'
     >
       {
         listMenu.map((menu) => (
           <Text weight='normal' size='sm' padding='8px'>
             <div
               style={{
-                width: '75px',
-                height: '40px',
+                minWidth: '75px',
+                minHeight: '40px',
                 background: '#ffffff',
                 margin: '5px',
                 marginRight: '10px',

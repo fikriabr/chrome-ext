@@ -18,7 +18,6 @@ const Container: React.FC<IContainer> = ({
   display,
   background,
   padding,
-  border,
 }) => {
   return (
     <StyledContainer
@@ -27,7 +26,6 @@ const Container: React.FC<IContainer> = ({
       display={display}
       background={background}
       padding={padding}
-      border={border}
     >
       {children}
     </StyledContainer>
@@ -41,7 +39,6 @@ const defaultProps: IContainer = {
   display: 'block',
   background: '#ffffff',
   padding: '0',
-  border: 'none',
 }
 Container.defaultProps = defaultProps
 

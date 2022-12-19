@@ -26,7 +26,7 @@ const leftMenu = [
     isActive: true,
     menus: [
       {
-        name: 'Working Hour Calculator',
+        name: 'Working Hour Calculator 123',
         components: <></>,
         icon: <Schedule32 />
       },
@@ -109,11 +109,15 @@ const PopupContainer = () => {
   };
 
   return (
-    <Container width='409px' height='401px'>
+    <Container
+      width='409px'
+      height='403px'
+      background='#EEEEEE'
+    >
       <Header title='Chrome Tools' />
       <Container
         width='409px'
-        height='300px'
+        height='301px'
         background='#FFFFFF'
         display='flex'
       >

@@ -18,8 +18,7 @@ const LeftContainer = ({
     <Container
       width="131px"
       height="300px"
-      background="#FFFFFF"
-      border="1px solid #CCCCCC"
+      background="#EEEEEE"
     >
       {
         listMenu.map((menu) => (
@@ -29,7 +28,7 @@ const LeftContainer = ({
               size="sm"
               padding="15px 10px"
               background={
-                menu.isActive ? "linear-gradient(0deg, #ebf2ff, #f6f6ff)" : "#FFFFFF"
+                menu.isActive ? "linear-gradient(0deg, #ebf2ff, #f6f6ff)" : "unset"
               }
             >
               {menu.name}
