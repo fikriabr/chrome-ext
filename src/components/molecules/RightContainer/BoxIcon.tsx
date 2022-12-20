@@ -4,7 +4,7 @@ export const BoxIcon = ({
   icon
 }: { icon: JSX.Element }) => {
   return (
-    <div
+    <span
       style={{
         minWidth: '75px',
         minHeight: '40px',
@@ -19,6 +19,6 @@ export const BoxIcon = ({
       }}
     >
       {icon}
-    </div>
+    </span>
   )
 }

@@ -1,64 +1,60 @@
 import styled from "styled-components";
 
-type TypeContainer = {
-  width?: string;
-  height?: string;
-  display?: string;
-  background?: string;
-  padding?: string;
+interface IDynamic extends React.HTMLAttributes<HTMLElement> {
+  stx: {
+    [key: string]: string | undefined
+  }
 }
 
-const StyledContainer = styled.div<TypeContainer>`
-  display: ${({ display }) => display};
-  width: ${({ width }) => width};
-  height: ${({ height }) => height};
-  background: ${({ background }) => background};
-  padding: ${({ padding }) => padding};
-  overflow-y: auto;
-`;
+const StyledContainer = styled.div<IDynamic>(({ stx }) =>
+  Object.keys(stx ?? {}).map((key) => ({
+    [key]: stx[key]
+  }))
+);
 
-
+const fontSize = {
+  xs: "12px",
+  sm: "14px",
+  md: "16px",
+  lg: "18px",
+  xl: "20px",
+  xxl: "24px",
+  default: "34px"
+}
 const getFontPixelsSize = (size: string) => {
   switch (size) {
     case "xs":
-      return "12px";
     case "sm":
-      return "14px";
     case "md":
-      return "16px";
     case "lg":
-      return "18px";
     case "xl":
-      return "20px";
     case "xxl":
-      return "24px";
+      return fontSize[size]
     default:
-      return "34px";
+      return fontSize.default;
   }
 };
 
-type TypeText = {
-  size?: string,
-  weight?: string,
-  color?: string,
-  padding?: string,
-  background?: string,
-}
+const StyledTextTemp = styled.p<IDynamic>(({ stx }: IDynamic) => {
+  const getObject = Object.keys(stx ?? {}).map((key) => {
+    if (key === 'fontSize') {
+      return { [key]: getFontPixelsSize(stx[key] ?? "") }
+    } else {
+      return { [key]: stx[key] }
+    }
+  })
+  return Object.assign({}, ...getObject)
+})
 
-const StyledText = styled.p<TypeText>`
-  font-size: ${({ size }) => getFontPixelsSize(size ?? "")};
-  font-weight: ${({ weight }) => weight};
-  color: ${({ color }) => color};
+const StyledText = styled(StyledTextTemp)`
   margin: 0;
-  padding: ${({ padding }) => padding || "none"};
-  background: ${({ background }) => background || ""};
   font-family: Lato, sans-serif;
   display: flex;
   align-items: center;
   &:hover {
     font-weight: bold;
   }
-`;
+`
 
 export {
   StyledContainer,

@@ -9,6 +9,9 @@ interface IContainer {
   background?: string
   padding?: string
   border?: string
+  stx?: {
+    [key: string]: string
+  }
 }
 
 const Container: React.FC<IContainer> = ({
@@ -18,14 +21,18 @@ const Container: React.FC<IContainer> = ({
   display,
   background,
   padding,
+  stx
 }) => {
   return (
     <StyledContainer
-      width={width}
-      height={height}
-      display={display}
-      background={background}
-      padding={padding}
+      stx={{
+        width,
+        height,
+        display,
+        background,
+        padding,
+        ...stx
+      }}
     >
       {children}
     </StyledContainer>

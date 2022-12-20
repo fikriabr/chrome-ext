@@ -8,6 +8,9 @@ interface IText {
   color?: string
   padding?: string
   background?: string
+  stx?: {
+    [key: string]: string
+  }
 }
 
 const defaultProps: IText = {
@@ -19,13 +22,30 @@ const defaultProps: IText = {
   background: '',
 }
 
-const Text: React.FC<IText> = ({ children, size, weight, color, padding, background }) => {
+const Text: React.FC<IText> = ({
+  children,
+  size,
+  weight,
+  color,
+  padding,
+  background,
+  stx
+}) => {
   return (
-    <StyledText size={size} weight={weight} color={color} padding={padding} background={background}>
+    <StyledText
+      stx={{
+        fontSize: size,
+        fontWeight: weight,
+        color,
+        padding,
+        background,
+        ...stx
+      }}
+    >
       {children}
     </StyledText>
-  )
-}
+  );
+};
 
 Text.defaultProps = defaultProps
 

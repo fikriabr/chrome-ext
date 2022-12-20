@@ -19,10 +19,13 @@ const RightContainer = ({
       width='278px'
       height='300px'
       background='#FFFFFF'
+      stx={{
+        overflowY: 'auto'
+      }}
     >
       {
-        listMenu.map((menu) => (
-          <Text weight='normal' size='sm' padding='8px'>
+        listMenu.map((menu, index) => (
+          <Text weight='normal' size='sm' padding='8px' key={`${String(index)}-rightIndex`}>
             <BoxIcon icon={menu.icon} />
             {menu.name}
           </Text>

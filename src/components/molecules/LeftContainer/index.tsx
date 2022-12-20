@@ -21,14 +21,17 @@ const LeftContainer = ({
       background="#EEEEEE"
     >
       {
-        listMenu.map((menu) => (
-          <a onClick={() => onClick(menu.name)}>
+        listMenu.map((menu, index) => (
+          <a
+            onClick={() => onClick(menu.name)}
+            key={`${String(index)}-leftIndex`}
+          >
             <Text
               weight={menu.isActive ? "bold" : "normal"}
               size="sm"
               padding="15px 10px"
               background={
-                menu.isActive ? "linear-gradient(0deg, #ebf2ff, #f6f6ff)" : "unset"
+                menu.isActive ? "#F9F9F9" : "unset"
               }
             >
               {menu.name}
