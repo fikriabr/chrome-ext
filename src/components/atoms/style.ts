@@ -46,15 +46,24 @@ const StyledTextTemp = styled.p<IDynamic>(({ stx }: IDynamic) => {
   return Object.assign({}, ...getObject)
 })
 
-const StyledText = styled(StyledTextTemp)`
-  margin: 0;
-  font-family: Lato, sans-serif;
-  display: flex;
-  align-items: center;
-  &:hover {
-    font-weight: bold;
-  }
-`
+interface TextHover {
+  hover?: boolean
+}
+
+const StyledText = styled(StyledTextTemp)<TextHover>(({ hover }: TextHover) => {
+  return (`
+    margin: 0;
+    font-family: Lato, sans-serif;
+    display: flex;
+    align-items: center;
+    ${hover ? (`
+      &:hover {
+        font-weight: bold;
+      }
+    `) : ''}
+  `
+  )
+})
 
 export {
   StyledContainer,

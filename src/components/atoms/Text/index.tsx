@@ -8,6 +8,7 @@ interface IText {
   color?: string
   padding?: string
   background?: string
+  hover?: boolean
   stx?: {
     [key: string]: string
   }
@@ -20,6 +21,7 @@ const defaultProps: IText = {
   children: '',
   padding: '0',
   background: '',
+  hover: false,
 }
 
 const Text: React.FC<IText> = ({
@@ -29,7 +31,8 @@ const Text: React.FC<IText> = ({
   color,
   padding,
   background,
-  stx
+  hover,
+  stx,
 }) => {
   return (
     <StyledText
@@ -39,13 +42,14 @@ const Text: React.FC<IText> = ({
         color,
         padding,
         background,
-        ...stx
+        ...stx,
       }}
+      hover={hover}
     >
       {children}
     </StyledText>
-  );
-};
+  )
+}
 
 Text.defaultProps = defaultProps
 

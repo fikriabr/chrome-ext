@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react'
 import {
   Schedule32,
   CodeSnippet32,
@@ -8,7 +8,8 @@ import {
   Satellite32,
   Air32,
   Source32,
-} from '../../components/atoms/Icons';
+} from '../../components/atoms/Icons'
+import WorkingHourCalculator from '../WorkingHourCalculator'
 
 export const LeftMenu = [
   {
@@ -17,30 +18,30 @@ export const LeftMenu = [
     menus: [
       {
         name: 'Working Hour Calculator 123',
-        components: <></>,
-        icon: <Schedule32 />
+        components: <WorkingHourCalculator />,
+        icon: <Schedule32 />,
       },
       {
         name: 'Coding Snippets',
         components: <></>,
-        icon: <CodeSnippet32 />
+        icon: <CodeSnippet32 />,
       },
       {
         name: 'Bookmarks',
         components: <></>,
-        icon: <Bookmarks32 />
+        icon: <Bookmarks32 />,
       },
       {
         name: 'Notification',
         components: <></>,
-        icon: <Notification32 />
+        icon: <Notification32 />,
       },
       {
         name: 'Schedule',
         components: <></>,
-        icon: <CalendarToday32 />
+        icon: <CalendarToday32 />,
       },
-    ]
+    ],
   },
   {
     name: 'Weather',
@@ -49,14 +50,14 @@ export const LeftMenu = [
       {
         name: 'Himawari 8',
         components: <></>,
-        icon: <Satellite32 />
+        icon: <Satellite32 />,
       },
       {
         name: 'Air Meter',
         components: <></>,
-        icon: <Air32 />
-      }
-    ]
+        icon: <Air32 />,
+      },
+    ],
   },
   {
     name: 'Other',
@@ -65,8 +66,8 @@ export const LeftMenu = [
       {
         name: 'Documentation',
         components: <></>,
-        icon: <Source32 />
+        icon: <Source32 />,
       },
-    ]
+    ],
   },
-];
+]
