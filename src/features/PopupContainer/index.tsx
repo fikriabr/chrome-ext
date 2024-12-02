@@ -78,7 +78,8 @@ const PopupContainer = () => {
             <Container
               width="auto"
               height="auto"
-              stx={{ position: 'absolute', right: '10px', top: '10px' }}
+              stx={{ position: 'fixed', right: '10px', top: '10px', zIndex: '100' }}
+              background='none'
             >
               <Button
                 icon={<CloseIcon />}

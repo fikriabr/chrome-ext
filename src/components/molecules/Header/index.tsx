@@ -10,7 +10,7 @@ interface IHeader {
 const Header = ({ title }: IHeader) => {
   return (
     <Container width="389px" height="82px" background="#EEEEEE" padding="10px">
-      <Text weight="bold" size="xl" color="#1848C2" padding="0 0 10px 0">
+      <Text weight="bold" size="xl" color="#444444" padding="0 0 10px 0">
         <BuildCircleIcon />
         &nbsp; {title}
       </Text>

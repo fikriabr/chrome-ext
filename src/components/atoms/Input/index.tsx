@@ -14,6 +14,8 @@ interface IInput {
   padding?: string
   border?: string
   icon?: JSX.Element
+  value?: string | number | null
+  disabled?: boolean
 }
 
 const Input: React.FC<IInput> = ({
@@ -29,10 +31,13 @@ const Input: React.FC<IInput> = ({
   border,
   icon,
   label,
+  value,
+  disabled = false
 }) => {
   return (
     <div style={{ padding }}>
       <TextField
+        value={value}
         id="input-with-sx"
         label={label}
         type={type}
@@ -42,6 +47,7 @@ const Input: React.FC<IInput> = ({
         onKeyDown={onKeyDown}
         fullWidth={true}
         size="small"
+        disabled={disabled}
         InputProps={{
           endAdornment: icon ? (
             <InputAdornment position="end">{icon}</InputAdornment>
