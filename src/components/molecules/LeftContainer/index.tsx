@@ -21,7 +21,7 @@ const LeftContainer = ({ listMenu, onClick }: ILeft) => {
           <Text
             weight={menu.isActive ? 'bold' : 'normal'}
             size="sm"
-            padding="15px 10px"
+            padding="15px"
             background={menu.isActive ? '#F9F9F9' : 'unset'}
             hover
           >

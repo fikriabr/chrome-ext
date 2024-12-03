@@ -15,5 +15,8 @@ const GlobalStyle = createGlobalStyle`
     font-style: normal;
     font-display: auto;
   }
+  .rightMenuList:not(:hover) .grayedIcon {
+    filter: contrast(175%) brightness(50%) opacity(40%);
+  }
 `
 export default GlobalStyle

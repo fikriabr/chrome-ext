@@ -12,9 +12,6 @@ const WorkingHourCalculator = () => {
   const [minute, setMinute] = useState<string>('00');
   const [result, setResult] = useState<string>('00:00');
 
-  // useEffect(() => {
-  //   setSelectedHour(hourOptions[0]);
-  // }, []);
   useEffect(() => {
     if (Number(hour) > selectedHour) {
       setHour('00')
@@ -64,7 +61,12 @@ const WorkingHourCalculator = () => {
     const hEnd = Math.floor(m / 60);
     const tAdd = m - hEnd * 60;
 
-    setResult(`${Number(lastEntryH) + hEnd}:${tAdd}`);
+    const minuteStr = Number(tAdd) < 10 ? `0${tAdd}` : tAdd
+
+    const hourRes = Number(lastEntryH) + hEnd
+    const hourStr = Number(hourRes) < 10 ? `0${Number(hourRes)}` : Number(hourRes)
+
+    setResult(`${hourStr}:${minuteStr}`);
   };
 
   return (

@@ -25,6 +25,7 @@ const RightContainer = ({ listMenu, onClick }: IRight) => {
         <a
           onClick={() => onClick(menu.name)}
           key={`${String(index)}-rightIndex`}
+          className='rightMenuList'
         >
           <Text weight="normal" size="sm" padding="8px" hover>
             <BoxIcon icon={menu.icon} />
