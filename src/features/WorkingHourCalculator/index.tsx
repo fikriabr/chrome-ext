@@ -18,6 +18,26 @@ const WorkingHourCalculator = () => {
     }
   }, [hour, selectedHour])
 
+  useEffect(() => {
+    chrome.storage?.local?.get('lastEntry', (data) => {
+      if (data.lastEntry) {
+        setLastEntry(data.lastEntry)
+      }
+    })
+
+    chrome.storage?.local?.get('hour', (data) => {
+      if (data.hour) {
+        setHour(data.hour)
+      }
+    })
+
+    chrome.storage?.local?.get('minute', (data) => {
+      if (data.minute) {
+        setMinute(data.minute)
+      }
+    })
+  }, [])
+
   function maskTime(value: string) {
     value = value.replace(/\D/g, '');
     value = value.replace(/^([0-9][0-9])([0-9][0-9])/g, '$1:$2');
@@ -30,6 +50,7 @@ const WorkingHourCalculator = () => {
       return;
     }
     setLastEntry(maskTime(value));
+    chrome.storage.local.set({ lastEntry: maskTime(value) });
   };
 
   const doWriteHour = (value: string) => {
@@ -38,17 +59,20 @@ const WorkingHourCalculator = () => {
       return;
     }
     setHour(`0${Number(value)}`);
+    chrome.storage.local.set({ hour: `0${Number(value)}` });
   };
 
   const doWriteMinute = (value: string) => {
     if (Number(value) < 10) {
       setMinute(`0${Number(value)}`);
+      chrome.storage.local.set({ minute: `0${Number(value)}` });
       return;
     }
     if (Number(value) > 59) {
       return;
     }
     setMinute(`${Number(value)}`);
+    chrome.storage.local.set({ minute: `${Number(value)}` });
   };
 
   const onCalculate = () => {
@@ -89,6 +113,7 @@ const WorkingHourCalculator = () => {
         stx={{ display: 'flex', gap: '10px' }}
       >
         <Input
+          key={'hour-input'}
           width='175px'
           type='text'
           label='Hour'
@@ -98,6 +123,7 @@ const WorkingHourCalculator = () => {
           value={hour}
         />
         <Input
+          key={'minute-input'}
           width='175px'
           type='text'
           label='Min'
@@ -111,8 +137,9 @@ const WorkingHourCalculator = () => {
         Selected Working Hour: {`${selectedHour}`}
       </Container>
       <Container height='auto' stx={{ marginTop: '20px' }}>
-        {hourOptions.map((option) => (
+        {hourOptions.map((option, _index) => (
           <Button
+            key={`${_index}-option-button`}
             variant='outlined'
             size='small'
             onClick={() => setSelectedHour(option)}
