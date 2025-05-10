@@ -48,6 +48,9 @@ const Input: React.FC<IInput> = ({
         fullWidth={true}
         size="small"
         disabled={disabled}
+        InputLabelProps={{
+          shrink: value !== undefined && value !== null
+        }}
         InputProps={{
           endAdornment: icon ? (
             <InputAdornment position="end">{icon}</InputAdornment>

@@ -1,9 +1,10 @@
 import React from 'react'
 import { StyledText } from '../style'
 
+type Sizes = "xs" | "sm" | "md" | "lg" | "xl" | "xxl"
 interface IText {
   children: React.ReactNode
-  size?: string
+  size?: Sizes
   weight?: string
   color?: string
   padding?: string
