@@ -1,3 +1,3 @@
-# My Chrome Extension Tools
+# Chrome Extension
 
 React - TypeScript - Chrome Extension
