@@ -18,24 +18,18 @@ const WorkingHourCalculator = () => {
     }
   }, [hour, selectedHour])
 
+  const getLocalStorage = (keys: string, callback: (value: string) => void) => {
+    chrome.storage?.local?.get(keys, (data) => {
+      if (data[keys]) {
+        callback(data[keys])
+      }
+    })
+  }
+
   useEffect(() => {
-    chrome.storage?.local?.get('lastEntry', (data) => {
-      if (data.lastEntry) {
-        setLastEntry(data.lastEntry)
-      }
-    })
-
-    chrome.storage?.local?.get('hour', (data) => {
-      if (data.hour) {
-        setHour(data.hour)
-      }
-    })
-
-    chrome.storage?.local?.get('minute', (data) => {
-      if (data.minute) {
-        setMinute(data.minute)
-      }
-    })
+    getLocalStorage('lastEntry', (value) => setLastEntry(value))
+    getLocalStorage('hour', (value) => setHour(value))
+    getLocalStorage('minute', (value) => setMinute(value))
   }, [])
 
   function maskTime(value: string) {
