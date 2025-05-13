@@ -49,7 +49,7 @@ const Input: React.FC<IInput> = ({
         size="small"
         disabled={disabled}
         InputLabelProps={{
-          shrink: value !== undefined && value !== null
+          shrink: !!value
         }}
         InputProps={{
           endAdornment: icon ? (

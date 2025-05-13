@@ -18,6 +18,10 @@ const WorkingHourCalculator = () => {
     }
   }, [hour, selectedHour])
 
+  const setLocalStorage = (keys: string, value: string) => {
+    chrome.storage.local.set({ [keys]: value });
+  }
+
   const getLocalStorage = (keys: string, callback: (value: string) => void) => {
     chrome.storage?.local?.get(keys, (data) => {
       if (data[keys]) {
@@ -40,11 +44,13 @@ const WorkingHourCalculator = () => {
 
   const doWriteLastEntry = (value: string) => {
     if (value.length > 4) {
-      setLastEntry(maskTime(value.replace(':', '').slice(0, 4)));
+      const maskText = maskTime(value.replace(':', '').slice(0, 4))
+      setLastEntry(maskText);
+      setLocalStorage("lastEntry", maskText)
       return;
     }
-    setLastEntry(maskTime(value));
-    chrome.storage.local.set({ lastEntry: maskTime(value) });
+    setLastEntry(maskTime(value))
+    setLocalStorage("lastEntry", maskTime(value))
   };
 
   const doWriteHour = (value: string) => {
@@ -52,21 +58,25 @@ const WorkingHourCalculator = () => {
     if (Number(value) > selectedHour) {
       return;
     }
-    setHour(`0${Number(value)}`);
-    chrome.storage.local.set({ hour: `0${Number(value)}` });
+    const hourText = `0${Number(value)}`
+    setHour(hourText)
+    setLocalStorage("hour", hourText)
   };
 
   const doWriteMinute = (value: string) => {
+    let minuteText = ''
     if (Number(value) < 10) {
-      setMinute(`0${Number(value)}`);
-      chrome.storage.local.set({ minute: `0${Number(value)}` });
+      minuteText = `0${Number(value)}`
+      setMinute(minuteText);
+      setLocalStorage("minute", minuteText);
       return;
     }
     if (Number(value) > 59) {
       return;
     }
-    setMinute(`${Number(value)}`);
-    chrome.storage.local.set({ minute: `${Number(value)}` });
+    minuteText = `${Number(value)}`
+    setMinute(minuteText);
+    setLocalStorage("minute", minuteText)
   };
 
   const onCalculate = () => {
@@ -85,10 +95,18 @@ const WorkingHourCalculator = () => {
     const hourStr = Number(hourRes) < 10 ? `0${Number(hourRes)}` : Number(hourRes)
 
     setResult(`${hourStr}:${minuteStr}`);
-  };
+  }
+  const onReset = () => {
+    setHour('00')
+    setLocalStorage("hour", "00")
+    setMinute('00')
+    setLocalStorage("minute", "00")
+    setLastEntry('')
+    setLocalStorage("lastEntry", "")
+  }
 
   return (
-    <Container width='100%' height='450px'>
+    <Container width='100%' height='400px'>
       <Text size='xl' weight='bold' padding='0 0 5px 0'>
         Working Hour Calculator
       </Text>
@@ -143,9 +161,12 @@ const WorkingHourCalculator = () => {
           </Button>
         ))}
       </Container>
-      <Container height='auto' stx={{ marginTop: '20px' }}>
+      <Container height='auto' stx={{ marginTop: '20px', display: 'flex', gap: '8px' }}>
         <Button variant='contained' size='small' onClick={onCalculate}>
           Calculate
+        </Button>
+        <Button variant='outlined' size='small' onClick={onReset}>
+          Reset
         </Button>
       </Container>
       <Container
