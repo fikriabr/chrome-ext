@@ -16,6 +16,9 @@ interface IInput {
   icon?: JSX.Element
   value?: string | number | null
   disabled?: boolean
+  stx?: {
+    [key: string]: string | object
+  }
 }
 
 const Input: React.FC<IInput> = ({
@@ -32,7 +35,8 @@ const Input: React.FC<IInput> = ({
   icon,
   label,
   value,
-  disabled = false
+  disabled = false,
+  stx
 }) => {
   return (
     <div style={{ padding }}>
@@ -63,6 +67,7 @@ const Input: React.FC<IInput> = ({
           display,
           background,
           border,
+          ...stx
         }}
       />
     </div>
