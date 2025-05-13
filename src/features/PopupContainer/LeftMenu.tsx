@@ -10,6 +10,7 @@ import {
   Source32,
 } from '../../components/atoms/Icons'
 import WorkingHourCalculator from '../WorkingHourCalculator'
+import CodingSnippet from '../CodingSnippet'
 
 export const LeftMenu = [
   {
@@ -23,7 +24,7 @@ export const LeftMenu = [
       },
       {
         name: 'Coding Snippets',
-        components: <></>,
+        components: <CodingSnippet />,
         icon: <CodeSnippet32 />,
       },
       {

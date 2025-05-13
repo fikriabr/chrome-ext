@@ -5,7 +5,7 @@ interface IButton {
   onClick?: React.MouseEventHandler<HTMLButtonElement> | undefined
   icon?: JSX.Element
   onlyIcon?: boolean
-  children?: string
+  children?: string | React.ReactNode
   variant?: 'text' | 'outlined' | 'contained'
   size?: 'small' | 'medium' | 'large'
   stx?: {
