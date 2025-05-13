@@ -1,16 +1,16 @@
-import { IconButton, Button as MUIButton } from '@mui/material';
-import React from 'react';
+import { IconButton, Button as MUIButton } from '@mui/material'
+import React from 'react'
 
 interface IButton {
-  onClick?: React.MouseEventHandler<HTMLButtonElement> | undefined;
-  icon?: JSX.Element;
-  onlyIcon?: boolean;
-  children?: string;
-  variant?: 'text' | 'outlined' | 'contained';
-  size?: 'small' | 'medium' | 'large';
+  onClick?: React.MouseEventHandler<HTMLButtonElement> | undefined
+  icon?: JSX.Element
+  onlyIcon?: boolean
+  children?: string
+  variant?: 'text' | 'outlined' | 'contained'
+  size?: 'small' | 'medium' | 'large'
   stx?: {
-    [key: string]: string;
-  };
+    [key: string]: string
+  }
 }
 
 const Button: React.FC<IButton> = ({
@@ -23,7 +23,7 @@ const Button: React.FC<IButton> = ({
   stx,
 }) => {
   return onlyIcon ? (
-    <IconButton aria-label='icon' size={size} onClick={onClick}>
+    <IconButton aria-label="icon" size={size} onClick={onClick}>
       {icon}
     </IconButton>
   ) : (
@@ -35,15 +35,15 @@ const Button: React.FC<IButton> = ({
     >
       {children}
     </MUIButton>
-  );
-};
+  )
+}
 
 const defaultProps: IButton = {
   variant: 'outlined',
   onlyIcon: false,
   children: '',
   size: 'small',
-};
-Button.defaultProps = defaultProps;
+}
+Button.defaultProps = defaultProps
 
-export default Button;
+export default Button

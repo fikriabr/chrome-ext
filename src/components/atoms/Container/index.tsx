@@ -21,7 +21,7 @@ const Container: React.FC<IContainer> = ({
   display,
   background,
   padding,
-  stx
+  stx,
 }) => {
   return (
     <StyledContainer
@@ -31,7 +31,7 @@ const Container: React.FC<IContainer> = ({
         display,
         background,
         padding,
-        ...stx
+        ...stx,
       }}
     >
       {children}
