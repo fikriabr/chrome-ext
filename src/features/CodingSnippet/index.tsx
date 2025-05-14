@@ -4,7 +4,8 @@ import Form from './Form'
 import Button from '../../components/atoms/Button'
 import Container from '../../components/atoms/Container'
 import Text from '../../components/atoms/Text'
-import { CloseIcon, PlusIcon } from '../../components/atoms/Icons'
+import localStorage from '../../utils/localStorage'
+import { CloseIcon } from '../../components/atoms/Icons'
 import 'prismjs/themes/prism.css'
 import 'prismjs/components/prism-typescript'
 import 'prismjs/components/prism-python'
@@ -14,6 +15,7 @@ const CodingSnippet: React.FC = () => {
   const [language, setLanguage] = useState<string>('')
   const [codes, setCodes] = useState<string>('')
   const [isOpen, setIsOpen] = useState(false)
+  const [codeSnippets, setCodeSnippets] = useState<objectType[]>([])
 
   type objectType = {
     id: number
@@ -21,14 +23,11 @@ const CodingSnippet: React.FC = () => {
     language: string
     code: string
   }
-  const [codeSnippets, setCodeSnippets] = useState<objectType[]>([])
+
+  const { getLocalStorage, setLocalStorage } = localStorage()
   const storeKey = 'CodingSnippet'
   useEffect(() => {
-    chrome.storage?.local?.get(storeKey, (data) => {
-      if (data[storeKey]) {
-        setCodeSnippets(data[storeKey])
-      }
-    })
+    getLocalStorage<objectType[]>(storeKey, (value) => setCodeSnippets(value))
   }, [])
 
   useEffect(() => {
@@ -60,14 +59,14 @@ const CodingSnippet: React.FC = () => {
     }
     const newCode = [...codeSnippets, data]
     setCodeSnippets(newCode)
-    chrome.storage.local.set({ [storeKey]: newCode })
+    setLocalStorage(storeKey, newCode)
     doClear()
   }
 
   const deleteRecord = (id: number) => {
     const filtered = codeSnippets.filter((data) => data.id !== id)
     setCodeSnippets(filtered)
-    chrome.storage.local.set({ [storeKey]: filtered })
+    setLocalStorage(storeKey, filtered)
   }
 
   return (

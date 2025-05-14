@@ -3,6 +3,7 @@ import Container from '../../components/atoms/Container'
 import Input from '../../components/atoms/Input'
 import Text from '../../components/atoms/Text'
 import Button from '../../components/atoms/Button'
+import localStorage from '../../utils/localStorage'
 
 const WorkingHourCalculator = () => {
   const hourOptions = [4, 6, 8]
@@ -18,22 +19,12 @@ const WorkingHourCalculator = () => {
     }
   }, [hour, selectedHour])
 
-  const setLocalStorage = (keys: string, value: string) => {
-    chrome.storage.local.set({ [keys]: value })
-  }
-
-  const getLocalStorage = (keys: string, callback: (value: string) => void) => {
-    chrome.storage?.local?.get(keys, (data) => {
-      if (data[keys]) {
-        callback(data[keys])
-      }
-    })
-  }
+  const { getLocalStorage, setLocalStorage } = localStorage()
 
   useEffect(() => {
-    getLocalStorage('lastEntry', (value) => setLastEntry(value))
-    getLocalStorage('hour', (value) => setHour(value))
-    getLocalStorage('minute', (value) => setMinute(value))
+    getLocalStorage<string>('lastEntry', (value) => setLastEntry(value))
+    getLocalStorage<string>('hour', (value) => setHour(value))
+    getLocalStorage<string>('minute', (value) => setMinute(value))
   }, [])
 
   function maskTime(value: string) {
