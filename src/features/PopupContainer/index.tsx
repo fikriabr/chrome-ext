@@ -72,8 +72,9 @@ const PopupContainer = () => {
         ) : (
           <Container
             width="calc(100% - 50px)"
-            height="calc(100% - 50px)"
+            height="450px"
             padding="25px"
+            stx={{ maxHeight: "650px", overflow: "scroll" }}
           >
             <Container
               width="auto"

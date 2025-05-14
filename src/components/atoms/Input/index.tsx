@@ -16,6 +16,7 @@ interface IInput {
   icon?: JSX.Element
   value?: string | number | null
   disabled?: boolean
+  multiline?: boolean
   stx?: {
     [key: string]: string | object
   }
@@ -36,7 +37,8 @@ const Input: React.FC<IInput> = ({
   label,
   value,
   disabled = false,
-  stx
+  stx,
+  multiline = false
 }) => {
   return (
     <div style={{ padding }}>
@@ -52,6 +54,8 @@ const Input: React.FC<IInput> = ({
         fullWidth={true}
         size="small"
         disabled={disabled}
+        multiline={multiline}
+        {...multiline ? { rows: 4 } : {}}
         InputLabelProps={{
           shrink: !!value
         }}

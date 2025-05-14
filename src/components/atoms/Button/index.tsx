@@ -8,9 +8,7 @@ interface IButton {
   children?: string | React.ReactNode
   variant?: 'text' | 'outlined' | 'contained'
   size?: 'small' | 'medium' | 'large'
-  stx?: {
-    [key: string]: string
-  }
+  stx?: React.CSSProperties
 }
 
 const Button: React.FC<IButton> = ({
@@ -23,7 +21,7 @@ const Button: React.FC<IButton> = ({
   stx,
 }) => {
   return onlyIcon ? (
-    <IconButton aria-label="icon" size={size} onClick={onClick}>
+    <IconButton aria-label="icon" size={size} onClick={onClick} style={{ ...stx }}>
       {icon}
     </IconButton>
   ) : (
@@ -33,6 +31,7 @@ const Button: React.FC<IButton> = ({
       size={size}
       style={{ ...stx }}
     >
+      {icon}
       {children}
     </MUIButton>
   )

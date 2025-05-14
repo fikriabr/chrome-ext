@@ -1,134 +1,134 @@
-import Container from '../../components/atoms/Container'
-import React, { useEffect, useState } from 'react'
-import Text from '../../components/atoms/Text'
-import Button from '../../components/atoms/Button'
-import { PlusIcon } from '../../components/atoms/Icons'
-import Input from '../../components/atoms/Input'
 import Prism from 'prismjs'
+import React, { useEffect, useState } from 'react'
+import Form from './Form'
+import Button from '../../components/atoms/Button'
+import Container from '../../components/atoms/Container'
+import Text from '../../components/atoms/Text'
+import { CloseIcon, PlusIcon } from '../../components/atoms/Icons'
 import 'prismjs/themes/prism.css'
-import InputOption from '../../components/atoms/Input/InputOptions'
+import 'prismjs/components/prism-typescript'
+import 'prismjs/components/prism-python'
 
 const CodingSnippet: React.FC = () => {
-  const small = InputOption.smallInputStyle
-
   const [title, setTitle] = useState<string>('')
   const [language, setLanguage] = useState<string>('')
   const [codes, setCodes] = useState<string>('')
-  const code = `String name = "My Name";
-var data = new List();
-`
+  const [isOpen, setIsOpen] = useState(false)
 
   type objectType = {
+    id: number
     title: string
     language: string
     code: string
   }
-  const [cs, setCS] = useState<objectType[]>([])
+  const [codeSnippets, setCodeSnippets] = useState<objectType[]>([])
   const storeKey = 'CodingSnippet'
   useEffect(() => {
     chrome.storage?.local?.get(storeKey, (data) => {
       if (data[storeKey]) {
-        setCS(data[storeKey])
+        setCodeSnippets(data[storeKey])
       }
     })
   }, [])
 
   useEffect(() => {
-    Prism.highlightAll();
-  }, [cs])
+    Prism.highlightAll()
+  }, [codeSnippets])
 
   const doClear = () => {
     setTitle('')
     setLanguage('')
     setCodes('')
+    setIsOpen(false)
+  }
+
+  const formOptions = {
+    doSetTitle: (title: string) => setTitle(title),
+    doSetLanguage: (lang: string) => setLanguage(lang),
+    doSetCodes: (codeText: string) => setCodes(codeText),
   }
 
   const addNew = () => {
-    const data = {
-      title: title,
-      language,
-      code: codes
+    if (!(title && language && codes)) {
+      return
     }
-    cs.push(data)
-    console.log('cs', cs)
-
-    chrome.storage.local.set({ [storeKey]: cs })
+    const data = {
+      id: (codeSnippets[codeSnippets.length - 1]?.id ?? 0) + 1,
+      title,
+      language,
+      code: codes,
+    }
+    const newCode = [...codeSnippets, data]
+    setCodeSnippets(newCode)
+    chrome.storage.local.set({ [storeKey]: newCode })
     doClear()
+  }
+
+  const deleteRecord = (id: number) => {
+    const filtered = codeSnippets.filter((data) => data.id !== id)
+    setCodeSnippets(filtered)
+    chrome.storage.local.set({ [storeKey]: filtered })
   }
 
   return (
     <Container width="100%" height="400px">
-      <Text size="xl" weight="bold" padding="0 0 5px 0">
+      <Text size="xl" weight="bold" padding="0 0 5px 0" stx={{ position: "sticky" }}>
         Coding Snippet
       </Text>
-      <Button size="small" variant="contained">
-        <span
-          style={{
-            position: 'absolute',
-            left: '10px',
-            marginTop: '4px',
-          }}
-        >
-          <PlusIcon width={14} height={14} fill="#ffffff" />
+      <Button
+        size="small"
+        variant="outlined"
+        onClick={() => setIsOpen(!isOpen)}
+      >
+        <span style={{ paddingLeft: '4px', fontSize: '10px' }}>
+          {isOpen ? 'Close' : 'Add New'}
         </span>
-        <span style={{ paddingLeft: '20px' }}>New Snippet</span>
       </Button>
 
-      <Container
-        width="100%"
-        height="auto"
-        padding='10px 0 0 0'
-      >
-        <Input
-          key={'Title-input'}
-          type="text"
-          label="Title"
-          placeholder=""
-          onChange={(e) => setTitle(e.target.value)}
-          value={title}
-          stx={small}
+      {isOpen && (
+        <Form
+          options={formOptions}
+          title={title}
+          language={language}
+          codes={codes}
+          addNew={addNew}
         />
-        <Input
-          key={'Language-input'}
-          type="text"
-          label="Language"
-          placeholder=""
-          onChange={(e) => setLanguage(e.target.value)}
-          value={language}
-          stx={small}
-        />
-        <Input
-          key={'Text-input'}
-          type="text"
-          label="Text Area"
-          placeholder=""
-          onChange={(e) => setCodes(e.target.value)}
-          value={codes}
-          stx={small}
-        />
-        <Button variant='contained' onClick={addNew}>Save</Button>
-      </Container>
+      )}
 
-      <Container height="auto" stx={{ overflow: 'scroll', paddingBottom: "30px", maxHeight: "150px" }}>
-        {
-          cs.map((data) => {
-            return (
-              <div style={{ marginTop: '10px' }}>
-                <span>{data?.title}</span>
-                <pre
-                  style={{
-                    border: "1px solid #ddd",
-                    borderRadius: '4px',
-                    padding: '10px',
-                    margin: '0',
-                  }}
-                >
-                  <code className={`language-${data?.language}`}>{data?.code}</code>
-                </pre>
-              </div>
-            )
-          })
-        }
+      <Container
+        height="auto"
+        stx={{ paddingBottom: '30px' }}
+      >
+        {codeSnippets.map((data) => {
+          return (
+            <div
+              style={{ marginTop: '10px', position: 'relative' }}
+              key={data.title}
+            >
+              <Button
+                size="small"
+                variant="outlined"
+                onClick={() => deleteRecord(data.id)}
+                stx={{ position: 'absolute', right: '0px', top: "-5px" }}
+                icon={<CloseIcon width={16} height={16} />}
+                onlyIcon
+              />
+              <p>{data?.title}</p>
+              <pre
+                style={{
+                  border: '1px solid #ddd',
+                  borderRadius: '4px',
+                  padding: '10px',
+                  marginTop: '10px',
+                }}
+              >
+                <code className={`language-${data?.language}`}>
+                  {data?.code}
+                </code>
+              </pre>
+            </div>
+          )
+        })}
       </Container>
     </Container>
   )
